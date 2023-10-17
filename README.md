@@ -1,4 +1,4 @@
-# rare-caching
+# SDV - Rare-caching
 
 ## Prérequis
 - Installer Docker
