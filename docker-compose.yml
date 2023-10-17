@@ -1,0 +1,33 @@
+version: '3.1'
+services:
+  api:
+    build:
+      context: ./apps/api
+    command: npm run start:dev
+    ports:
+      - "3000:3000"
+    environment:
+      - MONGO_URL=mongodb://root:root@mongo
+    volumes:
+      - ./apps/api:/usr/src/app
+      - /usr/src/app/node_modules
+  portal:
+    build:
+      context: ./apps/portal
+    command: npm run serve
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./apps/portal:/usr/src/app
+      - /usr/src/app/node_modules
+  mongo:
+    image: mongo
+    volumes:
+      - mongo:/data/db
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+volumes:
+  mongo:
